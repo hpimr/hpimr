@@ -6,7 +6,7 @@ for f in *.asc; do
     phtml="../public_html/$html"
     if ! [ -e $phtml ] || [ $f -nt $phtml ] ; then
         echo "Updating $f";
-        asciidoc -a lang=uk $f;
+        asciidoc -a lang=uk -a themedir=`pwd`/asciidoc-conf --theme=hpimr $f;
         mv -v $html ../public_html
     fi
 done
