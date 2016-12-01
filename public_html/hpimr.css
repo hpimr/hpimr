@@ -406,3 +406,209 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .print-only{display:block!important}
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
+
+/* CSS from hpmor.com */
+/* WP Navbar temp */
+
+#resizer {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	background: #fff;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+#resizer div {
+	position: relative;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+#resizer div a span
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+
+  /* edit: added z-index */
+  z-index: 1
+}
+
+#resizer a, #resizer a:hover {
+	text-decoration: none;
+	border: none;
+	background: #fff;
+	color: #000;
+}
+
+#resizer #smaller a {
+	font-size: 50%;
+}
+
+#resizer #original a, #resizer #inverter a {
+	font-size: 75%;
+}
+
+#inverter, #inverter a, #inverter a:hover {
+	background: #000;
+	color: #fff;
+}
+#access {
+	background: #222; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#252525, #0a0a0a);
+	background: -o-linear-gradient(#252525, #0a0a0a);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#252525), to(#0a0a0a)); /* older webkit syntax */
+	background: -webkit-linear-gradient(#252525, #0a0a0a);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	clear: both;
+	display: block;
+	float: left;
+	margin: 0 auto 6px;
+	width: 100%;
+}
+#access ul {
+	font-size: 13px;
+	list-style: none;
+	margin: 0 0 0 -0.8125em;
+	padding-left: 0;
+}
+#access li {
+	float: left;
+	position: relative;
+}
+#access a {
+	color: #eee;
+	display: block;
+	line-height: 3.333em;
+	padding: 0 1.2125em;
+	text-decoration: none;
+}
+#access ul ul {
+	-moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	display: none;
+	float: left;
+	margin: 0;
+	position: absolute;
+	top: 3.333em;
+	left: 0;
+	width: 188px;
+	z-index: 99999;
+}
+#access ul ul ul {
+	left: 100%;
+	top: 0;
+}
+#access ul ul a {
+	background: #f9f9f9;
+	border-bottom: 1px dotted #ddd;
+	color: #444;
+	font-size: 13px;
+	font-weight: normal;
+	height: auto;
+	line-height: 1.4em;
+	padding: 10px 10px;
+	width: 168px;
+}
+#access li:hover > a,
+#access ul ul :hover > a,
+#access a:focus {
+	background: #efefef;
+}
+#access li:hover > a,
+#access a:focus {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#f9f9f9, #e5e5e5);
+	background: -o-linear-gradient(#f9f9f9, #e5e5e5);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9f9f9), to(#e5e5e5)); /* Older webkit syntax */
+	background: -webkit-linear-gradient(#f9f9f9, #e5e5e5);
+	color: #373737;
+}
+#access ul li:hover > ul {
+	display: block;
+}
+#access .current-menu-item > a,
+#access .current-menu-ancestor > a,
+#access .current_page_item > a,
+#access .current_page_ancestor > a {
+	font-weight: bold;
+}
+
+/* chapter */
+#content h2
+{
+	text-align: center;
+	font-face: 'PT Sans', Georgia;
+    font-size: 2.4em;
+	color: #222;
+	padding-bottom: 80px;
+	background: url('fleur.png') no-repeat center bottom;
+	max-width: 18em;
+	margin: 0 auto;
+}
+
+#storycontent a, #storycontent a:link {
+	color: #ca9300;
+	text-decoration: none;
+	border-bottom: 2px dotted #e3cc8e;
+	line-height: 1.7em;
+}
+
+#storycontent a:hover {
+	background: #d8a63a;
+	color: white;
+	border: none;
+	padding: 2px 0;
+}
+
+#storycontent
+{
+	max-width: 42em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2em;
+	line-height: 140%;
+}
+#invertable {
+	background: white;
+}
+
+#nav-top, #nav-bottom
+{
+	text-align: center;
+}
+
+#nav-top {
+	border-bottom: 4px dotted #f5f5f5;
+	padding-bottom: .4em;
+	margin-bottom: 1.5em;
+	margin-top: 0px; /* .3em; */
+}
+
+#nav-bottom {
+	margin-top: 1.5em;
+	padding-top: 70px;
+	background: url('fleur.png') no-repeat center top;
+}
+
+form, input { display: inline; }
+
+.nav-prev, .nav-next, .nav-dropdown
+{
+	display: inline;
+	padding-left: .5em;
+	padding-right: .5em;
+}
+
+.nav-dropdown
+{
+	display: inline;
+}
