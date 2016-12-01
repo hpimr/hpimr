@@ -351,7 +351,8 @@ $(document).ready(function() {
 */
 	$('.nav-dropdown :submit').hide();
 	$('.nav-select').change(function() {
-		$(this).closest("form").submit();
+		url = $(this).closest("form").find("option:selected").val();
+		window.location.href = url;
 	});
 });
 
@@ -407,7 +408,7 @@ function invertColors() {
 
 $(document).ready(function() {
 
- $('body').prepend('<div id="resizer"> <div id="smaller"><a href="#" title="Smaller text">A<span></span></a></div> <div id="original"><a href="#" title="Reset text size">A<span></span></a></div> <div id="bigger"><a href="#" title="Bigger text">A<span></span></a></div> <div id="fullwidth"><a href="#" title="Full-width text">&laquo;&raquo;<span></span></a></div> <div id="readwidth"><a href="#" title="Column-width text">&raquo;&laquo;<span></span></a></div> <div id="inverter"><a href="#" title="Invert text">A<span></span></a></div> </div>');
+ $('body').prepend('<div id="resizer"> <div id="smaller"><a href="#" title="Зменшити шрифт">Є<span></span></a></div> <div id="original"><a href="#" title="Повернути розмір тексту">Є<span></span></a></div> <div id="bigger"><a href="#" title="Збільшити шрифт">Є<span></span></a></div> <div id="fullwidth"><a href="#" title="Текст на всю ширину">&laquo;&raquo;<span></span></a></div> <div id="readwidth"><a href="#" title="Текст у колонку">&raquo;&laquo;<span></span></a></div> <div id="inverter"><a href="#" title="Інвертувати текст">Є<span></span></a></div> </div>');
 
  if($.cookie('TEXT_INVERT') == 1) {
   invertColors();
