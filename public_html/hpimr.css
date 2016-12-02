@@ -421,10 +421,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
 #resizer div {
 	position: relative;
+   font-size: 150%;
 	padding-left: 3px;
 	padding-right: 3px;
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 #resizer div a span
@@ -447,11 +448,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 }
 
 #resizer #smaller a {
-	font-size: 50%;
+	font-size: 75%;
 }
 
-#resizer #original a, #resizer #inverter a {
+/*#resizer #original a, #resizer #inverter a {
 	font-size: 75%;
+}*/
+#resizer #bigger a {
+	font-size: 125%;
 }
 
 #inverter, #inverter a, #inverter a:hover {

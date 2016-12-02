@@ -408,7 +408,7 @@ function invertColors() {
 
 $(document).ready(function() {
 
- $('body').prepend('<div id="resizer"> <div id="smaller"><a href="#" title="Зменшити шрифт">Є<span></span></a></div> <div id="original"><a href="#" title="Повернути розмір тексту">Є<span></span></a></div> <div id="bigger"><a href="#" title="Збільшити шрифт">Є<span></span></a></div> <div id="fullwidth"><a href="#" title="Текст на всю ширину">&laquo;&raquo;<span></span></a></div> <div id="readwidth"><a href="#" title="Текст у колонку">&raquo;&laquo;<span></span></a></div> <div id="inverter"><a href="#" title="Інвертувати текст">Є<span></span></a></div> </div>');
+ $('body').prepend('<div id="resizer"> <div id="smaller"><a href="#" title="Зменшити шрифт">Ґ<span></span></a></div> <div id="original"><a href="#" title="Повернути розмір тексту">Ґ<span></span></a></div> <div id="bigger"><a href="#" title="Збільшити шрифт">Ґ<span></span></a></div> <div id="fullwidth"><a href="#" title="Текст на всю ширину">&laquo;&raquo;<span></span></a></div> <div id="readwidth"><a href="#" title="Текст у колонку">&raquo;&laquo;<span></span></a></div> <div id="inverter"><a href="#" title="Інвертувати текст">Ґ<span></span></a></div> </div>');
 
  if($.cookie('TEXT_INVERT') == 1) {
   invertColors();
