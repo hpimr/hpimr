@@ -1,0 +1,18 @@
+== Test of github apostrophes
+
+Dear GitHub, I've got a problem in Diff View of the following line:
+
+Пам'ятайте, тут з кирилицею коїться щось дивне. Пам'ятайте.
+
+In previous line between two ' symbols text is shown in italics. It shouldn't.
+Those are cyrillic letters, between letters asciidoctor changes ' to apostrophe,
+it doesn't indicate italics.
+
+From user manual (http://asciidoctor.org/docs/user-manual/):
+
+[quote]
+____
+When entered with the ' key, Asciidoctor renders an apostrophe that is directly
+preceded and followed by a character, such as in contractions and possessive
+singular forms, as a curved apostrophe.
+____
