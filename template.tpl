@@ -42,4 +42,5 @@ include::${currentChapter}.asc[]
 
 <div>
 <div>
+<script src="./google-analytics.js" type="text/javascript"></script>
 ++++
