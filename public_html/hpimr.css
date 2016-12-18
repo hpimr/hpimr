@@ -628,3 +628,15 @@ form, input { display: inline; }
     text-align: center;
     display: block;
 }
+
+/* error reporting */
+#missr_dialog {
+	cursor: pointer;
+	position: fixed;
+	z-index: 999999999;
+	padding: 7px;
+	background-color: yellow;
+}
+#missr_dialog.success {
+	background-color: limegreen;
+}
