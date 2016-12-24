@@ -34,4 +34,4 @@ if ($payload['ref'] != 'refs/heads/master') {
     exit(0);
 }
 write("all ok, updating\n");
-write(shell_exec("export PATH=~/opt/bin:\$PATH; cd .. && git fetch && git reset --hard origin/master && ./generate-html.sh"));
+write(shell_exec("export PATH=~/opt/bin:\$PATH; cd .. && git fetch && git reset --hard origin/master && ./generate-html.py"));
