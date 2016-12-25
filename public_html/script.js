@@ -495,11 +495,12 @@ $( function() {
     autoOpen: false,
     modal: true,
     buttons: {
-      "Повідомити про помилку": reportError,
       "Скасувати": function() {
         dialog.dialog( "close" );
-      }
+      },
+      "Повідомити": reportError,
     },
+    minWidth: 500,
     close: function() {
       form[ 0 ].reset();
     }

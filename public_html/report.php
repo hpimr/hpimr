@@ -1,6 +1,7 @@
 <?php
 
 $message = "===================\n";
+$message .= "page: #${_POST['page']}#\n";
 $message .= "fulltext: #${_POST['fulltext']}#\n";
 $message .= "translation: #${_POST['translation']}#\n";
 $message .= "problem: #${_POST['problem']}#\n";

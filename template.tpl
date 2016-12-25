@@ -48,21 +48,30 @@ include::${currentChapter}.asc[]
   <p class="validateTips">Всі поля необовʼязкові.</p>
 
   <form>
-    <fieldset>
       <input type="hidden" name="fulltext" id="fulltext" value="">
-      <label for="translation">Текст перекладу</label>
-      <input type="text" name="translation" id="translation" value="Виділений текст" class="text ui-widget-content ui-corner-all ui-state-disabled" disabled>
-      <label for="problem">Ваше зауваження (у чому помилка)</label>
-      <input type="text" name="problem" id="problem" value="" class="text ui-widget-content ui-corner-all">
-      <label for="email">Поштова скринька</label>
-      <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-      <label for="name">Імʼя</label>
-      <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
-      <label for="remember"><input type="checkbox" name="remember" id="remember" value="1" class="ui-widget-content">Запамʼятати</label>
+      <input type="hidden" name="translation" id="translation" value="">
+      <input type="hidden" name="page" id="page" value="${currentChapter}">
+      <table width="100%">
+      <tr>
+          <td><label for="problem">Що не так:</label></td>
+          <td width="100%"><input type="text" name="problem" id="problem" value="" class="text ui-widget-content ui-corner-all"></td>
+      </tr>
+      <tr>
+        <td><label for="email">Поштова скринька:</label></td>
+        <td><input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all"></td>
+      </tr>
+      <tr>
+        <td><label for="name">Імʼя:</label></td>
+        <td><input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all"></td>
+      </tr>
+      <tr>
+        <td><label for="remember">Запамʼятати</label></td>
+        <td><input type="checkbox" name="remember" id="remember" value="1" class="ui-widget-content"></td>
+      </tr>
+      </table>
 
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
   </form>
 </div>
 <button id="report_error_button">Помилка?</button>
