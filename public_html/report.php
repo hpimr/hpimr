@@ -9,5 +9,5 @@ $message .= "name: #${_POST['name']}#\n";
 $message .= "email: #${_POST['email']}#\n";
 $message .= "\n";
 
-file_put_contents("../reports.txt", $message, FILE_APPEND);
+file_put_contents("/home/hedro105/reports.txt", $message, FILE_APPEND);
 echo "All ok!\n<br/>";
