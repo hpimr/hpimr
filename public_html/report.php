@@ -1,7 +1,7 @@
 <?php
 
 $message = "===================\n";
-$message .= date('%c') . ", ${_SERVER['REMOTE_ADDR']}\n";
+$message .= date('c') . ", ${_SERVER['REMOTE_ADDR']}\n";
 $message .= "Сторінка: #${_POST['page']}#\n";
 $message .= "Повний текст: #${_POST['fulltext']}#\n";
 $message .= "Виділине: #${_POST['translation']}#\n";
