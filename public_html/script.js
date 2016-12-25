@@ -488,17 +488,16 @@ $( function() {
         $.cookie('RE_EMAIL', $("#email").val(), { path: '/', expires: 10000 });
     }
     var sentText = form.serialize();
-    $.post('./report.php', sentText).always(function(response) {
-        if (response.status == 200) {
-            dialogMsg.dialog("option", "title", "Дякуємо!");
-            dialogMsg.text("Дуже дякуємо за повідомлення!");
-            window.setTimeout(function(){dialogMsg.dialog("close");}, 2000);
-        } else {
-            dialogMsg.dialog("option", "title", "Помилка :(");
-            dialogMsg.html("На жаль, виникла помилка на сервері. Якщо є можливість, надішліть на <pre>0_0@гпімр.укр</pre> таке повідомлення:"
-                           + "<br><textarea>" + sentText + "</textarea><br/>Тут міститься ваше повідомлення.<br/>"
-                           + "Вибачте за незручності, дякуємо за бажання допомогти!");
-        }
+    $.post('./report.php', sentText).done(function() {
+        dialogMsg.dialog("option", "title", "Дякуємо!");
+        dialogMsg.text("Дуже дякуємо за повідомлення!");
+        window.setTimeout(function(){dialogMsg.dialog("close");}, 2000);
+        dialogMsg.dialog("open");
+    }).fail(function() {
+        dialogMsg.dialog("option", "title", "Помилка :(");
+        dialogMsg.html("На жаль, виникла помилка на сервері. Якщо є можливість, надішліть на <pre>0_0@гпімр.укр</pre> таке повідомлення:"
+                       + "<br><textarea>" + sentText + "</textarea><br/>Тут міститься ваше повідомлення.<br/>"
+                       + "Вибачте за незручності, дякуємо за бажання допомогти!");
         dialogMsg.dialog("open");
     });
     dialog.dialog( "close" );
