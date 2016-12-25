@@ -483,12 +483,16 @@ $( function() {
   var dialog, dialogMsg, form, translation = $( "#translation" ), fullText = $("#fulltext");
 
   function reportError() {
+    if ($('#remember:checkbox:checked').length > 0) {
+        $.cookie('RE_NAME', $("#name").val(), { path: '/', expires: 10000 });
+        $.cookie('RE_EMAIL', $("#email").val(), { path: '/', expires: 10000 });
+    }
     var sentText = form.serialize();
     $.post('./report.php', sentText).always(function(response) {
         if (response.status == 200) {
             dialogMsg.dialog("option", "title", "Дякуємо!");
             dialogMsg.text("Дуже дякуємо за повідомлення!");
-            window.setTimeout(function(){dialogMsg.dialog("close");}, 3000);
+            window.setTimeout(function(){dialogMsg.dialog("close");}, 2000);
         } else {
             dialogMsg.dialog("option", "title", "Помилка :(");
             dialogMsg.html("На жаль, виникла помилка на сервері. Якщо є можливість, надішліть на <pre>0_0@гпімр.укр</pre> таке повідомлення:"
@@ -521,7 +525,9 @@ $( function() {
     },
     minWidth: 500,
     close: function() {
-      form[ 0 ].reset();
+      $("#problem").val("");
+      $("#translation").val("");
+      $("#fulltext").val("");
     }
   });
 
@@ -585,6 +591,13 @@ $( function() {
     }
 
     $(document).ready(function($){
+      if ($.cookie('RE_NAME')) {
+        $("#name").val($.cookie('RE_NAME'));
+      }
+      if ($.cookie('RE_EMAIL')) {
+        $("#email").val($.cookie('RE_EMAIL'));
+      }
+
       $("#report_error_button").button().on("click", function() {
         $("#report_error_button").hide();
         dialog.dialog("open");
