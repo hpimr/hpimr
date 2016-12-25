@@ -480,17 +480,36 @@ $(document).ready(function() {
 
 /* Форма повідомлення про помилку */
 $( function() {
-  var dialog, form, translation = $( "#translation" ), fullText = $("#fulltext");
+  var dialog, dialogMsg, form, translation = $( "#translation" ), fullText = $("#fulltext");
 
   function reportError() {
-    $.post('./report.php', form.serialize(), function(response) {
-        console.log('Got this from the server: ' + response);
-        // TODO Додати подяку
+    var sentText = form.serialize();
+    $.post('./report.php', sentText).always(function(response) {
+        if (response.status == 200) {
+            dialogMsg.dialog("option", "title", "Дякуємо!");
+            dialogMsg.text("Дуже дякуємо за повідомлення!");
+            window.setTimeout(function(){dialogMsg.dialog("close");}, 3000);
+        } else {
+            dialogMsg.dialog("option", "title", "Помилка :(");
+            dialogMsg.html("На жаль, виникла помилка на сервері. Якщо є можливість, надішліть на <pre>0_0@гпімр.укр</pre> таке повідомлення:"
+                           + "<br><textarea>" + sentText + "</textarea><br/>Тут міститься ваше повідомлення.<br/>"
+                           + "Вибачте за незручності, дякуємо за бажання допомогти!");
+        }
+        dialogMsg.dialog("open");
     });
     dialog.dialog( "close" );
     return true;
   }
 
+  dialogMsg = $("#dialog-message").dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      "Гаразд": function() {
+        dialogMsg.dialog( "close" );
+      },
+    },
+  });
   dialog = $( "#dialog-form" ).dialog({
     autoOpen: false,
     modal: true,

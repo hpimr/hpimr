@@ -44,7 +44,8 @@ include::${currentChapter}.asc[]
 
 <div>
 <div>
-<div style="display:hidden" id="dialog-form" title="Повідомити про помилку">
+<div style="display:none" id="dialog-message"></div>
+<div style="display:none" id="dialog-form" title="Повідомити про помилку">
   <p class="validateTips">Всі поля необовʼязкові.</p>
 
   <form>
