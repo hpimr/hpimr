@@ -628,3 +628,18 @@ form, input { display: inline; }
     text-align: center;
     display: block;
 }
+
+/* error reporting */
+#report_error_button {
+	cursor: pointer;
+	position: absolute;
+	z-index: 999999999;
+	padding: 7px;
+	/*background-color: yellow;*/
+}
+/*#missr_dialog.success {
+	background-color: limegreen;
+}*/
+
+.ui-dialog .validateTips { border: 1px solid transparent; padding: 0.3em; font-size: 75% }
+.ui-dialog input.text { width:95%; padding: .4em; }
