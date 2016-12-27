@@ -617,10 +617,10 @@ form, input { display: inline; }
 	display: inline;
 }
 
-.help-with-errors
+#help-with-errors
 {
    text-align: center;
-   font-size: 75%;
+   font-size: 87%;
 }
 
 /* custom for 11th chapter and further */
