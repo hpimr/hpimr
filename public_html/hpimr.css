@@ -617,6 +617,12 @@ form, input { display: inline; }
 	display: inline;
 }
 
+.help-with-errors
+{
+   text-align: center;
+   font-size: 75%;
+}
+
 /* custom for 11th chapter and further */
 .paragraph>.title
 {

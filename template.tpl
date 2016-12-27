@@ -39,7 +39,10 @@ include::${currentChapter}.asc[]
 </div>
 </div>
 
-<div id="nav-bottom">${navi}</div>
+<div id="nav-bottom">
+<div id="help-with-errors">Помітили помилку? Допоможіть -- виділіть її й натисніть на кнопку "`Помилка?`". Дякуємо :)</div>
+${navi}
+</div>
 </div>
 
 <div>
