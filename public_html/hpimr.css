@@ -634,6 +634,10 @@ form, input { display: inline; }
     text-align: center;
     display: block;
 }
+.underline
+{
+    text-decoration: underline;
+}
 
 /* error reporting */
 #report_error_button {
