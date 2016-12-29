@@ -57,8 +57,12 @@ ${navi}
       <input type="hidden" name="page" id="page" value="${currentChapter}">
       <table width="100%">
       <tr>
-          <td><label for="problem">Що не так:</label></td>
-          <td width="100%"><input type="text" name="problem" id="problem" value="" class="text ui-widget-content ui-corner-all"></td>
+          <td colspan="2"><label for="problem">Що не так:</label></td>
+      </tr>
+      <tr>
+          <td width="100%" colspan="2">
+              <textarea rows="3" style="width: 100%" name="problem" id="problem" class="text ui-widget-content ui-corner-all"></textarea>
+          </td>
       </tr>
       <tr>
         <td><label for="email">Поштова скринька:</label></td>
