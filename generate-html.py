@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import glob
 import re
 import string
 import subprocess
@@ -93,11 +92,26 @@ for p in pages:
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
 
 def create_service_worker():
-    template = file_get_contents('sw.template.js')
+    files2cache = [
+        '/',
+        'fleur.png',
+        'help.html',
+        'icon192.png',
+        'hpimr.css',
+        'index.html',
+        'jquery-ui.css',
+        'manifest.json',
+        'script.js',
+        'sw.js'
+    ]
+    for c in chapters:
+        files2cache.append(c + '.html')
 
-    files2cache = ['"%s"' % f.split('/')[1] for f in glob.glob('public_html/*')]
-    files2cache.append('"/"') # to cache index too
-    sw = template.replace('__FILES_TO_CACHE__', ',\n'.join(files2cache))
+    template = file_get_contents('sw.template.js')
+    sw = template.replace(
+        '__FILES_TO_CACHE__',
+        ',\n'.join('"%s"' % f for f in files2cache)
+    )
     file_put_contents('public_html/sw.js', sw)
 
 create_service_worker()
