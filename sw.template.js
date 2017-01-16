@@ -1,11 +1,15 @@
 // Cache everything static
+
+var cacheName = 'hpmor__VERSION__';
+var files2cache = [
+__FILES_TO_CACHE__
+];
+
 self.addEventListener('install', function(e) {
     console.log('installing cache', e);
     e.waitUntil(
-        caches.open('the-magic-cache').then(function(cache) {
-            return cache.addAll([
-                __FILES_TO_CACHE__
-            ]);
+        caches.open(cacheName).then(function(cache) {
+            return cache.addAll(files2cache);
         })
     );
 });
@@ -18,6 +22,21 @@ self.addEventListener('fetch', function(event) {
         caches.match(event.request).then(function(response) {
             console.log('matched cache', response);
             return response || fetch(event.request);
+        })
+    );
+});
+
+// This will clean old caches after new one is installed
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cn) {
+                    if (cn != cacheName) {
+                        return caches.delete(cn);
+                    }
+                })
+            );
         })
     );
 });

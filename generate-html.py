@@ -91,19 +91,24 @@ for p in pages:
     asciidoc = templPage.substitute({'navi': '', 'currentChapter': p, 'vars': asciidocVars})
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
 
+def getVersion():
+    return subprocess.check_output(
+        'git rev-list --count HEAD'.split()
+    ).strip()
+
 def create_service_worker():
     files2cache = [
         '/',
         'fleur.png',
-        'help.html',
         'icon192.png',
         'hpimr.css',
-        'index.html',
         'jquery-ui.css',
         'manifest.json',
         'script.js',
         'sw.js'
     ]
+    for p in pages:
+        files2cache.append(p + '.html')
     for c in chapters:
         files2cache.append(c + '.html')
 
@@ -111,7 +116,11 @@ def create_service_worker():
     sw = template.replace(
         '__FILES_TO_CACHE__',
         ',\n'.join('"%s"' % f for f in files2cache)
+    ).replace(
+        '__VERSION__',
+        getVersion()
     )
+    print('public_html/sw.js')
     file_put_contents('public_html/sw.js', sw)
 
 create_service_worker()
