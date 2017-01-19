@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import json
 import re
 import string
 import subprocess
@@ -91,34 +92,38 @@ for p in pages:
     asciidoc = templPage.substitute({'navi': '', 'currentChapter': p, 'vars': asciidocVars})
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
 
-def getVersion():
-    return subprocess.check_output(
-        'git rev-list --count HEAD'.split()
-    ).strip()
+
+def get_last_change_timestamp(filename):
+    git_output = subprocess.check_output([
+        'git', 'log', '-1', '--date=raw', filename
+    ])
+    return int(re.findall(r'Date:\s+(\d+)', git_output)[0])
 
 def create_service_worker():
-    files2cache = [
-        '/',
+    index_ts = get_last_change_timestamp('index.asc')
+    files2cache = {
+        '/': index_ts
+    }
+    for fn in [
         'fleur.png',
         'icon192.png',
         'hpimr.css',
         'jquery-ui.css',
         'manifest.json',
         'script.js',
-        'sw.js'
-    ]
+    ]:
+        files2cache[fn] = get_last_change_timestamp('public_html/' + fn)
+
     for p in pages:
-        files2cache.append(p + '.html')
+        files2cache[p + '.html'] = max(get_last_change_timestamp(p + '.asc'), index_ts)
+
     for c in chapters:
-        files2cache.append(c + '.html')
+        files2cache[c + '.html'] = get_last_change_timestamp(c + '.asc')
 
     template = file_get_contents('sw.template.js')
     sw = template.replace(
         '__FILES_TO_CACHE__',
-        ',\n'.join('"%s"' % f for f in files2cache)
-    ).replace(
-        '__VERSION__',
-        getVersion()
+        json.dumps(files2cache, indent=4)
     )
     print('public_html/sw.js')
     file_put_contents('public_html/sw.js', sw)
