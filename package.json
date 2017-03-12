@@ -1,0 +1,7 @@
+{
+  "name": "hpimr",
+  "description": "Гаррі Поттер і Методи Раціональності, переклад hpmor.com",
+  "dependencies": {
+    "sw-precache": "^5.0.0"
+  }
+}
