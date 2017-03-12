@@ -625,6 +625,6 @@ $( function() {
 
 
 // Add service worker
-navigator.serviceWorker && navigator.serviceWorker.register('/sw.js').then(function(registration) {
+navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
   console.log('Service worker registered with scope: ', registration.scope);
 });
