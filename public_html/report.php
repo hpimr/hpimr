@@ -11,7 +11,7 @@ $message .= "e-mail: #${_POST['email']}#\n";
 $message .= "\n";
 
 $to = "0_0@xn--c1asif2i.xn--j1amh";
-$subject = "[гпімр] Повідомлення про помилку";
+$subject = "[гпімр] Повідомлення про помилку від ${_SERVER['REMOTE_ADDR']}";
 
 $headers = "From: .@xn--c1asif2i.xn--j1amh";
 
