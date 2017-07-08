@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json
 import re
 import string
 import subprocess
@@ -93,5 +92,10 @@ for p in pages:
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
 
 # call sw-precache to generate service worker code
-# npm install should be runned beforehand
-subprocess.call(['node_modules/sw-precache/cli.js', '--root=public_html'])
+# 'npm install -g sw-precache' should be runned beforehand
+subprocess.call([
+    'sw-precache',
+    '--root=public_html',
+    '--config=sw-precache-config.js',
+    '--verbose'
+])
