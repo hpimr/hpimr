@@ -58,7 +58,14 @@ for ch in chapters:
 
 def callAsciidoctor(code, path):
     file_put_contents('tmp.asc', code)
-    command = ['asciidoctor', '-a', 'lang=uk', '-a', 'linkcss', '-a', 'stylesheet=hpimr.css', '-b', 'html5', 'tmp.asc', '-o', path]
+    command = [
+        'asciidoctor', '-a', 'lang=uk',
+        '-a', 'docinfo1', # додавати в head кожного документа вміст з docinfo.html
+        '-a', 'linkcss',
+        '-a', 'stylesheet=hpimr.css',
+        '-b', 'html5',
+        'tmp.asc', '-o', path
+    ]
     print(' '.join(command))
     subprocess.call(command)
 
@@ -83,3 +90,12 @@ for i, ch in enumerate(chapters):
 for p in pages:
     asciidoc = templPage.substitute({'navi': '', 'currentChapter': p, 'vars': asciidocVars})
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
+
+# call sw-precache to generate service worker code
+# 'npm install -g sw-precache' should be runned beforehand
+subprocess.call([
+    'sw-precache',
+    '--root=public_html',
+    '--config=sw-precache-config.js',
+    '--verbose'
+])

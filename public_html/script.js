@@ -622,3 +622,9 @@ $( function() {
   };
   window.MisspellingReporter = new MisspellingReporter();
 } );
+
+
+// Add service worker
+navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+  console.log('Service worker registered with scope: ', registration.scope);
+});
