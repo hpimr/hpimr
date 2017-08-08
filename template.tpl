@@ -14,6 +14,11 @@
 :untitled-label: Без назви
 :version-label: Версія
 :warning-caption: Попередження
+:apos: &#700;
+:lsquo: &laquo;
+:rsquo: &raquo;
+:ldquo: &bdquo;
+:rdquo: &#8223;
 ${vars}
 
 ++++
