@@ -19,6 +19,7 @@
 :rsquo: &raquo;
 :ldquo: &bdquo;
 :rdquo: &#8223;
+:stress: &#x0301;
 ${vars}
 
 ++++
