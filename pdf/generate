@@ -1,8 +1,12 @@
 #!/bin/bash
 
-set -ex
+# виходити після будь-якої помилки:
+set -e
 
-BASEDIR=`dirname $0`
+# друкувати на stderr команди, які виконуються:
+set -x
+
+BASEDIR=`dirname $0`       # директорія цього скрипта
 DESTDIR="../public_html"
 
 PDFTITLE="Гаррі Поттер та Методи Раціональності"
@@ -29,8 +33,9 @@ sed -i 's|asciidoc-hr|\\vspace{1em} \\hrule \\vspace{1em}|g' hpimr.tex
 # починаємо розділи із нової сторінки:
 sed -i 's/^\\section{/\\pagebreak \\vspace{3em} \\section{/' hpimr.tex
 
-xelatex hpimr.tex
+xelatex hpimr.tex >xelatex.log
 mv hpimr.pdf $DESTDIR/
 
+# epub:
 pandoc --from=docbook --to=epub3 *.xml -o hpimr.epub
 mv hpimr.epub $DESTDIR/
