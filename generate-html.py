@@ -2,8 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import re
+import sys
 import string
 import subprocess
+from subprocess import CalledProcessError, STDOUT
+
+import smtplib
+from email.mime.text import MIMEText
+
+errors_to_mail = []
 
 import rss
 
@@ -102,9 +109,54 @@ rss.rss_generate(contents, site_name)
 
 # call sw-precache to generate service worker code
 # 'npm install -g sw-precache' should be runned beforehand
-subprocess.call([
-    'sw-precache',
-    '--root=public_html',
-    '--config=sw-precache-config.js',
-    '--verbose'
-])
+try:
+    subprocess.call([
+        'sw-precache',
+        '--root=public_html',
+        '--config=sw-precache-config.js',
+        '--verbose'
+    ])
+    print('sw-precache: success')
+except Exception as e:
+    print('sw-precache failed: ' + e.message)
+    errors_to_mail.append(('sw-precache failed', e.message))
+
+### генерація pdf та epub:
+try:
+    subprocess.check_output(['./pdf/generate'], stderr=STDOUT)
+    print('pdf/generate: success!')
+except CalledProcessError as e:
+    print('No pdf for you today :(')
+    title = 'pdf/generate failed (code %d)' % e.returncode
+    errors_to_mail.append((title, e.output))
+
+
+### відравляємо помилки:
+if not errors_to_mail:
+    sys.exit()
+
+mail_text = []
+for title, text in errors_to_mail:
+    mail_text.append('Error: ' + title)
+    if text:
+        mail_text.extend([
+            '=' * 80,
+            text,
+            '=' * 80
+        ])
+    mail_text.append('')
+
+### лист із помилками
+sender = 'generate@xn--c1asif2i.xn--j1amh'
+receiver = '0_0@xn--c1asif2i.xn--j1amh'
+
+# print('\n'.join(mail_text))
+
+msg = MIMEText('\n'.join(mail_text), 'plain', 'utf-8')
+msg['Subject'] = 'generate-html.py errors'
+msg['From'] = sender
+msg['To'] = receiver
+
+smtp = smtplib.SMTP('localhost')
+smtp.sendmail(sender, [receiver], msg.as_string())
+smtp.quit()
