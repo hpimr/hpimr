@@ -146,17 +146,21 @@ for title, text in errors_to_mail:
         ])
     mail_text.append('')
 
+mail_text = '\n'.join(mail_text)
+
 ### лист із помилками
 sender = 'generate@xn--c1asif2i.xn--j1amh'
 receiver = '0_0@xn--c1asif2i.xn--j1amh'
 
-# print('\n'.join(mail_text))
-
-msg = MIMEText('\n'.join(mail_text), 'plain', 'utf-8')
+msg = MIMEText(mail_text, 'plain', 'utf-8')
 msg['Subject'] = 'generate-html.py errors'
 msg['From'] = sender
 msg['To'] = receiver
 
-smtp = smtplib.SMTP('localhost')
-smtp.sendmail(sender, [receiver], msg.as_string())
-smtp.quit()
+try:
+    smtp = smtplib.SMTP('localhost')
+    smtp.sendmail(sender, [receiver], msg.as_string())
+    smtp.quit()
+except Exception as e:
+    print('Failed to send the email: ' + e.message)
+    print(mail_text)
