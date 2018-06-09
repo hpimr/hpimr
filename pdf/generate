@@ -9,7 +9,7 @@ set -x
 BASEDIR=`dirname $0`       # директорія цього скрипта
 DESTDIR="../public_html"
 
-PDFTITLE="Гаррі Поттер та Методи Раціональності"
+PDFTITLE="Гаррі Поттер і Методи Раціональності"
 
 cd $BASEDIR
 
