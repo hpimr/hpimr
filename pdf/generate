@@ -33,7 +33,7 @@ sed -i 's|asciidoc-hr|\\vspace{1em} \\hrule \\vspace{1em}|g' hpimr.tex
 # починаємо розділи із нової сторінки:
 sed -i 's/^\\section{/\\pagebreak \\vspace{3em} \\section{/' hpimr.tex
 
-xelatex hpimr.tex >xelatex.log
+xelatex -interaction=nonstopmode hpimr.tex >xelatex.log
 mv hpimr.pdf $DESTDIR/
 
 # epub:
