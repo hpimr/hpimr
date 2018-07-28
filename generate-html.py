@@ -5,18 +5,37 @@ import re
 import string
 import subprocess
 
+import rss
+
+site_name = 'http://xn--c1asif2i.xn--j1amh/'
+
 pages = [
     'help',
     'index',
 ]
 chapters = []
+contents = {}
 
 with open('index.asc') as f:
     for line in f:
-        match = re.match('^\* link:([0-9]{3}).html\[\{chapter[0-9]{3}\}\] \([0-9.]+\)$', line)
-        if match:
-            ch = match.group(1)
-            chapters.extend([ch,])
+        match = re.match('^\* link:([0-9]{3}).html\[\{chapter[0-9]{3}\}\] \(([0-9.]+)\)$', line)
+        if not match:
+            continue
+
+        ch = match.group(1)
+        date = match.group(2)
+
+        contents[ch] = {}
+        contents[ch] ['date'] = date
+        chapters.append(ch)
+
+        # парсимо заголовок розділу із файлу розділу:
+        with open(ch + '.asc') as f:
+            for line in f:
+                match = re.match('^== (.*)', line)
+                if match:
+                    contents[ch]['title'] = match.group(1)
+                    break
 
 def getUrl(ch):
     return '/' + ch + '.html'
@@ -24,18 +43,7 @@ def getUrl(ch):
 def optsForCh(ch):
     return {'url': getUrl(ch), 'title': contents[ch]['title']}
 
-contents = {}
-for num in chapters:
-    p = getUrl(num)
-    contents[num] = {
-        'title': '',
-    }
-    with open(num + '.asc') as f:
-        for line in f:
-            match = re.match('^== (.*)', line)
-            if match:
-                contents[num]['title'] = match.group(1)
-                break
+print contents
 
 def file_get_contents(filename):
     with open(filename) as f:
@@ -90,6 +98,9 @@ for i, ch in enumerate(chapters):
 for p in pages:
     asciidoc = templPage.substitute({'navi': '', 'currentChapter': p, 'vars': asciidocVars})
     callAsciidoctor(asciidoc, 'public_html/' + p + '.html')
+
+
+rss.rss_generate(contents, site_name)
 
 # call sw-precache to generate service worker code
 # 'npm install -g sw-precache' should be runned beforehand
