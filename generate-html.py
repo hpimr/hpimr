@@ -43,8 +43,6 @@ def getUrl(ch):
 def optsForCh(ch):
     return {'url': getUrl(ch), 'title': contents[ch]['title']}
 
-print contents
-
 def file_get_contents(filename):
     with open(filename) as f:
         return f.read()

@@ -47,7 +47,7 @@ def rss_generate(data, site_name):
     ''' 
     # itemlist зберігає оновлення в порядку від новіших до старіших; 
     itemlist = [] 
-    for chapter, info in data.iteritems():
+    for chapter, info in data.items():
         day, month, year = info['date'].split('.')
         d = datetime.date(int(year), int(month), int(day))
         itemlist.append((d, chapter))
@@ -56,7 +56,7 @@ def rss_generate(data, site_name):
     itemlist.sort(reverse=True)
 
     with open('public_html/rss.xml', 'w') as f:
-        pub_date = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
+        pub_date = itemlist[0][0].strftime('%a, %d %b %Y 00:00:00 +0300')
         f.write(rss_start % (site_name, pub_date))
 
         for d, chapter in itemlist:
