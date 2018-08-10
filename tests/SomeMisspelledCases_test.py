@@ -6,22 +6,22 @@ import unittest
 import re
 import testsdata
 
-# треба просто дописувати неправильні закінчення сюди:
+# треба просто дописувати типові помилки сюди:
 genitives = [
         'поясу',
         # 'стола',  # ok, ok, just kidding .)
     ]
 
 
-class SomeGenitiveCases_Test(testsdata.TestsData, unittest.TestCase):
+class SomeMisspelledCases_Test(testsdata.TestsData, unittest.TestCase):
     def setUp(self):
         self.genitives = [
                 re.compile(r'\s{}\s'.format(g), re.M|re.X)
                     for g in genitives
             ]
 
-    def test_CommonGenitives(self):
-        """===> Перевірка закінчень деяких слів у родовому"""
+    def test_CommonMisspellings(self):
+        """===> Перевірка деяких типових помилок"""
         for f in self.ascfiles:
             for gpatt in self.genitives:
                 self.assertFalse(gpatt.search(f.text),
