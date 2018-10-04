@@ -28,7 +28,7 @@ ${vars}
 <div id="access">
 <div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-53"><a href="/">Зміст</a></li>
 <li id="menu-item-101" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-101"><a href="http://hpmor.com/">Оригінал англійською</a></li>
-<li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83"><a href="http://github.com/hpimr/hpimr">github</a></li>
+<li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83"><a href="http://gitlab.com/hpimr/hpimr">gitlab</a></li>
 <li id="menu-item-48" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48"><a href="/help.html">Як долучитися</a></li>
 <li id="menu-item-48" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="https://www.facebook.com/groups/212447182535471/">Фейсбук</a></li>
 <li id="menu-item-48" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/rss.xml">RSS</a></li>
