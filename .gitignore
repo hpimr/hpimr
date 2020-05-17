@@ -2,3 +2,7 @@ public_html/*.html
 public_html/service-worker.js
 node_modules/
 tmp.asc
+pdf/*.xml
+*.aux
+*.log
+*.out

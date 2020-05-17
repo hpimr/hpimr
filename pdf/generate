@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# виходити після будь-якої помилки:
+set -e
+
+# друкувати на stderr команди, які виконуються:
+set -x
+
+BASEDIR=`dirname $0`       # директорія цього скрипта
+DESTDIR="../public_html"
+
+PDFTITLE="Гаррі Поттер і Методи Раціональності"
+
+cd $BASEDIR
+
+# генеруємо docbook:
+asciidoctor --backend=docbook --destination-dir=. ../*.asc
+
+# epub:
+pandoc --from=docbook --to=epub3 *.xml -o hpimr.epub
+mv hpimr.epub $DESTDIR/
+
+# матеріалізуємо горизонтальні лінії, щоб вони пережили конвертацію в tex:
+sed -i 's|<?asciidoc-hr?>|asciidoc-hr|g' *.xml
+
+pandoc --include-in-header=header.tex --from=docbook *.xml -o hpimr.tex
+
+sed -i "0,/maketitle/ s/\\\\maketitle.*$/\\\\input{front}/" hpimr.tex
+# лагодимо розмір шрифту та заголовок:
+sed -i "0,/documentclass/ s/documentclass\[\]{article}/documentclass\[12pt\]{book}/g" hpimr.tex
+sed -i "0,/pdftitle/ s/pdftitle={.*}/pdftitle={$PDFTITLE}/g" hpimr.tex
+sed -i "0,/\\\\title{/ s/\\\\title{.*}/\\\\title{$PDFTITLE}/g" hpimr.tex
+# лагодимо апостроф на такий, який розуміє tex:
+sed -i "s/ʼ/'/g" hpimr.tex
+# лагодимо наголоси:
+sed -i "s|\(.\)\\\\{stress\\\\}|\\\\'\\1|g" hpimr.tex
+# робимо лінії лініями:
+sed -i 's|asciidoc-hr|\\vspace{1em} \\hrule \\vspace{1em}|g' hpimr.tex
+# починаємо розділи із нової сторінки:
+sed -i 's/^\\section{/\\input{section} \\section{/' hpimr.tex
+
+# 
+sed -i 's/\\emph{Оригінальна примітка автора:}/\\pagebreak \\emph{Оригінальна примітка автора:}/' hpimr.tex
+
+
+xelatex -interaction=nonstopmode hpimr.tex >xelatex.log
+xelatex -interaction=nonstopmode hpimr.tex >xelatex.log
+mv hpimr.pdf $DESTDIR/
+
